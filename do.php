@@ -67,8 +67,8 @@ function getImgUrl($filename,$baseUrl){
 	while(!feof($file)){
 		$content.=fread($file,1024);
 	}
-	$arr=explode('url(',$content);
-	array_shift($arr);
+	preg_match_all ( "/url\((.*?)\)/" ,  $content ,  $matches );
+	$arr = $matches[1];
 	foreach($arr as $k => &$v){
 		$a=explode(')',$v);
 		$v=trim(trim($a[0],'"'),"'");//去掉单双引号
